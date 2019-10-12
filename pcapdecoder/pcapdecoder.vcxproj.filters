@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{33b9a75a-b219-4ec3-9ea5-d63cb9e222d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\http">
+      <UniqueIdentifier>{83066ff9-c0d2-4188-856f-1361f00ce3ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{8c009e0b-2424-4426-adfb-d57cfe0cb7e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\http">
+      <UniqueIdentifier>{b20b3b55-aa0d-4747-b55d-b08976f6c97b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\tcpip">
+      <UniqueIdentifier>{32fdb7ea-9673-4211-bc8e-9c91f03db645}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\tcpip">
+      <UniqueIdentifier>{baa39a12-5c60-4a56-97a6-909395b4ad9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\utils">
+      <UniqueIdentifier>{7506bda2-85e4-4e90-a611-f7c9d57a10a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\utils">
+      <UniqueIdentifier>{b1536c5f-b1e2-453c-adf8-754b64eb5073}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\parser">
+      <UniqueIdentifier>{bf1a1e50-d6e8-4489-9fd8-904d1bfd990c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\parser">
+      <UniqueIdentifier>{439954ef-72b4-4dbf-bc41-62af48644337}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\amqp">
+      <UniqueIdentifier>{e2ecf822-430c-44bd-bba4-481dc68db65b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\amqp">
+      <UniqueIdentifier>{a205f26c-941d-410c-9cfb-d9bfbcde985b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\pcapdecoder.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\http\http.c">
+      <Filter>src\http</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tcpip\tcpip.c">
+      <Filter>src\tcpip</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\log.c">
+      <Filter>src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\utils.c">
+      <Filter>src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\amqp\amqp.c">
+      <Filter>src\amqp</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\myhash.c">
+      <Filter>src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\parser\pcapparser.c">
+      <Filter>src\parser</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\http\http.h">
+      <Filter>include\http</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tcpip\tcpip.h">
+      <Filter>include\tcpip</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\log.h">
+      <Filter>include\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\utils.h">
+      <Filter>include\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\amqp\amqp.h">
+      <Filter>include\amqp</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\myhash.h">
+      <Filter>include\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\parser\pcapparser.h">
+      <Filter>include\parser</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\Makefile.am">
+      <Filter>src</Filter>
+    </None>
+  </ItemGroup>
+</Project>
