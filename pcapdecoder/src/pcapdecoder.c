@@ -14,6 +14,7 @@
 #include "pcapparser.h"
 
 UINT32 net_byte_swap = 0;
+extern int byte_order_swap;
 
 /*
  * main():
@@ -73,9 +74,12 @@ int main(int argc, char* argv[]) {
     */
     char pcap_ng_magic_number[4] = { 0x0A, 0x0D, 0x0D, 0x0A };
 
-    // LibpcapFileFormat
-    // https://wiki.wireshark.org/Development/LibpcapFileFormat
-    char libpcap_magic_number[4] = { 0xD4, 0xC3, 0xB2, 0xA1 };
+    /* 
+       LibpcapFileFormat
+       https://wiki.wireshark.org/Development/LibpcapFileFormat
+    */
+    char libpcap_little_endian[4] = { 0xD4, 0xC3, 0xB2, 0xA1 }; // magic number
+    char libpcap_big_endian[4] = { 0xA1, 0xB2, 0xC3, 0xD4 };
 
     UINT32 file_idx = 0;
     while (arg_idx < argc) {
@@ -100,12 +104,17 @@ int main(int argc, char* argv[]) {
                 exit(31);
             }
 
-            if (memcmp(buf, libpcap_magic_number, 4) == 0) {
+            if (memcmp(buf, libpcap_little_endian, 4) == 0) {
+                if (my_sys_endianness == ENDIAN_BIG) byte_order_swap = 1;
+                total_read = processPcap(pcap_handler);
+            } else if (memcmp(buf, libpcap_big_endian, 4) == 0) {
+                if (my_sys_endianness == ENDIAN_LITTLE) byte_order_swap = 1;
                 total_read = processPcap(pcap_handler);
             } else if (memcmp(buf, pcap_ng_magic_number, 4) == 0) {
                 total_read = processPcapNg(pcap_handler);
             } else {
                 LOG("Unsupported file format %s, skipped\n", pcap_filename);
+                break;
             }
         }
 

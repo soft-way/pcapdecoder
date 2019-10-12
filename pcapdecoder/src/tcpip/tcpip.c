@@ -136,6 +136,9 @@ int parseIPv6(unsigned char* data, int data_len) {
             ipv6_version);
         return 0;
     }
+    create_ipv6_str(src_ip, ipv6_data + 8);
+    create_ipv6_str(dest_ip, ipv6_data + 24);
+
 
     unsigned int next_header = *(ipv6_data + 6);
     if (next_header != 0x06) {
@@ -230,6 +233,61 @@ int parseUDP(unsigned char* data, int len) {
 
 void create_ipv4_str(unsigned char* buf, unsigned char* ip) {
     sprintf(buf, "%03d.%03d.%03d.%03d", *ip, *(ip + 1), *(ip + 2), *(ip + 3));
+}
+
+void create_ipv6_str(unsigned char* buf, unsigned char* ip) {
+    unsigned char hex[16] = {
+        '0', '1', '2', '3', '4', '5', '6', '7',
+        '8', '9', 'a', 'b', 'c', 'd', 'e', 'f',
+    };
+
+    int i = 0, j = 0;
+    for (i = 0; i < 8; i++) {
+        int found = 0;
+        if (ip[0] == 0 && ip[1] == 0) {
+            buf[j++] = '0';
+            buf[j++] = ':';
+        }
+        else {
+            if (ip[0] >> 4 || found) {
+                found = 1;
+                buf[j++] = hex[ip[0] >> 4];
+            }
+            if (ip[0] & 0x0F || found) {
+                found = 1;
+                buf[j++] = hex[ip[0] & 0x0F];
+            }
+            if (ip[1] >> 4 || found) {
+                found = 1;
+                buf[j++] = hex[ip[1] >> 4];
+            }
+            if (ip[1] & 0x0F || found) {
+                buf[j++] = hex[ip[1] & 0x0F];
+            }
+
+            if (i < 7) buf[j++] = ':';
+        }
+        ip += 2;
+    }
+    buf[j] = 0;
+    // erase duplicate 0
+    j = 0;
+    int k = 0;
+    while (buf[j] != 0) {
+        if (buf[j] == ':' && buf[j + 1] == '0') {
+            k = j;
+            while (buf[j] == ':' && buf[j + 1] == '0') {
+                j += 2;
+            }
+            if (j - k > 2) {
+                k++;
+                while (buf[j] != 0) buf[k++] = buf[j++];
+                buf[k] = 0;
+                break;
+            }
+        }
+        j++;
+    }
 }
 
 PDUType pdu_type(unsigned char* p) {

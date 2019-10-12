@@ -32,6 +32,7 @@ int parseTCP(unsigned char* d, int l);
 int parseUDP(unsigned char* d, int l);
 
 void create_ipv4_str(unsigned char* buf, unsigned char* ip);
+void create_ipv6_str(unsigned char* buf, unsigned char* ip);
 
 PDUType pdu_type(unsigned char* p);
 
